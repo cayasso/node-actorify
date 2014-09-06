@@ -235,4 +235,23 @@ describe('Actor#send()', function(){
     actor.send('thumb', '300x300');
     actor.send('thumb', '600x600');
   })
+
+  describe('Actor#use()', function(){
+    it('should extend instance', function(){
+      var stream = new Stream;
+      var actor = actorify(stream);
+      actor.use(function(act){
+        act.should.equal(actor);
+      });
+    })
+
+    it('should allow passing arguments', function(){
+      var stream = new Stream;
+      var actor = actorify(stream);
+      actor.use(function(act, arg1, arg2){
+        arg1.should.equal(1);
+        arg2.should.equal('a');
+      }, 1, 'a');
+    })
+  })
 })
