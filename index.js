@@ -141,6 +141,21 @@ Actor.prototype.send = function(){
 };
 
 /**
+ * Extends actor instance.
+ * 
+ * @param {Function} fn
+ * @return {Actor}
+ * @api public
+ */
+
+Actor.prototype.use = function use(plugin) {
+  var args = slice.call(arguments, 1);
+  args.unshift(this);
+  plugin.apply(this, args);
+  return this;
+};
+
+/**
  * Return a reply message for `id` and `args`.
  *
  * @param {String} id
